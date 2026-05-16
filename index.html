@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://raw.githubusercontent.com data:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com;">
     <title>IIIIIIIIIIIIIIIIII</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"
+            integrity="sha384-H+hy9ULve6xfxRkWIh/YOtvDdpXgV2fmAGQkIDTxIgZwNoaoBal14Di2YTMR6MzR"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.5/dist/purify.min.js"
+            integrity="sha384-qSFej5dZNviyoPgYJ5+Xk4bEbX8AYddxAHPuzs1aSgRiXxJ3qmyWNaPsRkpv/+x5"
+            crossorigin="anonymous"></script>
     <style>
         html, body {
             height: 100%;
@@ -658,7 +664,9 @@
         </div>
     </div>
     <div id="blog-modal" style="display:none; position:fixed; inset:0; background-color:#000000; z-index:99999; flex-direction:column; padding:0;">
-        <div style="position:absolute; inset:0; background: url('images/arkaplan.png') no-repeat center center; background-size: cover; opacity: 0.05; pointer-events:none; z-index:1; filter: grayscale(100%);"></div>
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index:1;">
+            <img src="images/logoll.png" alt="" style="max-width:40%; max-height:50%; opacity:0.275; filter:grayscale(100%); pointer-events:none; user-select:none;">
+        </div>
         
         <div style="width:100%; flex: 0 0 auto; display:flex; justify-content:space-between; background:#111111; padding:10px 30px; border-bottom: 1px solid #ffffff; box-sizing:border-box; z-index:2; position:relative;">
             <span id="blog-modal-title" style="color:#ffffff; font-family:'Monaco', 'Menlo', 'Consolas', monospace; font-size:15px; font-weight:normal;">blog-yazisi.md</span>
@@ -736,7 +744,8 @@
             const response = await fetch(url);
             if (!response.ok) throw new Error("Dosya okunamadı.");
             const mdText = await response.text();
-            blogContent.innerHTML = marked.parse(mdText);
+            const rawHtml = marked.parse(mdText);
+            blogContent.innerHTML = DOMPurify.sanitize(rawHtml);
         } catch(e) {
             blogContent.innerHTML = '<span style="color:#ff5555;">Hata: Blog yazısı yüklenemedi.</span>';
         }
@@ -760,13 +769,29 @@
             let htmlList = 'total ' + mdFiles.length + '\n';
             mdFiles.forEach(file => {
                 const date = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' });
-                htmlList += `-rw-r--r-- 1 root root  ----- ${date} <a href="#" onclick="openBlog('${file.download_url}', '${file.name}'); return false;" style="color:#3daee9;text-decoration:underline;cursor:pointer;">${file.name}</a>\n`;
+                const safeUrl = encodeURI(file.download_url);
+                const safeName = file.name.replace(/[<>"'&]/g, c => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','&':'&amp;'})[c]);
+                htmlList += `-rw-r--r-- 1 root root  ----- ${date} <a href="#" class="blog-link" data-url="${safeUrl}" data-name="${safeName}" style="color:#3daee9;text-decoration:underline;cursor:pointer;">${safeName}</a>\n`;
             });
             blogContainer.innerHTML = htmlList;
+            blogContainer.addEventListener('click', function(e) {
+                const link = e.target.closest('.blog-link');
+                if (link) {
+                    e.preventDefault();
+                    openBlog(decodeURI(link.dataset.url), link.dataset.name);
+                }
+            });
         } catch (error) {
             console.warn(error.message);
             blogContainer.innerHTML = `total 1
--rw-r--r-- 1 root root  12345 Local Test <a href="#" onclick="openBlog('blogs/ornek-blog.md', 'ornek-blog.md'); return false;" style="color:#3daee9;text-decoration:underline;cursor:pointer;">ornek-blog.md</a>`;
+-rw-r--r-- 1 root root  12345 Local Test <a href="#" class="blog-link" data-url="blogs/ornek-blog.md" data-name="ornek-blog.md" style="color:#3daee9;text-decoration:underline;cursor:pointer;">ornek-blog.md</a>`;
+            blogContainer.addEventListener('click', function(e) {
+                const link = e.target.closest('.blog-link');
+                if (link) {
+                    e.preventDefault();
+                    openBlog(decodeURI(link.dataset.url), link.dataset.name);
+                }
+            });
         }
     }
     loadBlogs();

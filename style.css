@@ -1,0 +1,263 @@
+body {
+    background: #0a1622;
+    background-image: url('images/arkaplan.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #b8c7ce;
+}
+.xp-window {
+    background: rgba(10, 22, 34, 0.92);
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+    max-width: 650px;
+    margin: 48px auto 32px auto;
+    border-radius: 10px;
+    padding: 0 0 12px 0;
+    border: 2px solid #1e375a;
+}
+.xp-titlebar {
+    background: linear-gradient(90deg, #0a1622 0%, #1e375a 100%);
+    color: #6ec1e4;
+    padding: 18px 28px 8px 28px;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1.5px solid #1e375a;
+}
+.xp-titlebar::before {
+    content: "┌[ kali@vintage-hack ]─[ ~ ]";
+    font-size: 14px;
+    margin-right: 12px;
+    color: #6ec1e4;
+    opacity: 0.7;
+}
+.xp-menu {
+    background: none;
+    padding: 0 28px 8px 28px;
+    font-size: 15px;
+    color: #b0b8b8;
+    margin-bottom: 8px;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+}
+.xp-menu a {
+    color: #b0b8b8;
+    text-decoration: none;
+    margin-right: 12px;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    transition: border 0.2s;
+    letter-spacing: 1px;
+}
+.xp-menu a:hover {
+    border-bottom: 2px solid #444;
+    background: #23272833;
+    border-radius: 3px;
+}
+.xp-content {
+    padding: 0 28px 0 28px;
+    color: #b8c7ce;
+    font-size: 16px;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+}
+.xp-content h1 {
+    color: #b0b8b8;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+}
+.xp-content h2 {
+    color: #6e7a7a;
+    font-size: 17px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+}
+.xp-content ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+.xp-content a {
+    color: #6ec1e4;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.xp-content a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+pre, code {
+    background: #101c2c;
+    color: #6ec1e4;
+    font-family: 'Fira Mono', 'Consolas', 'monospace';
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 15px;
+    box-shadow: 0 1px 4px #0002;
+}
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: #6ec1e4;
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+    vertical-align: middle;
+}
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+.xp-footer {
+    background: none;
+    color: #3a4a5a;
+    text-align: right;
+    padding: 8px 28px 0 0;
+    font-size: 13px;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    font-family: 'Fira Mono', 'Consolas', 'monospace', 'Tahoma', sans-serif;
+    letter-spacing: 1px;
+}
+body::after {
+    content: "";
+    position: fixed;
+    left: 0; top: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,255,70,0.04) 0 1px, transparent 1px 3px);
+    z-index: 1;
+    mix-blend-mode: lighten;
+}
+.xp-window, .xp-titlebar, .xp-menu, .xp-content, .xp-footer {
+    position: relative;
+    z-index: 2;
+}
+.kali-terminal-frame {
+    box-shadow: 0 8px 32px 0 #000a;
+    overflow: hidden;
+    background: rgba(10, 22, 34, 0.25);
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    z-index: 9999;
+}
+.kali-terminal-frame.shrink {
+    max-width: 1100px;
+    margin: 60px auto 40px auto;
+    border-radius: 10px;
+    min-height: 462px;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    position: relative;
+    inset: auto;
+    z-index: 1;
+}
+.kali-terminal-topbar {
+    background: #232b36;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid #232b36;
+}
+.kali-terminal-title {
+    color: #b8c7ce;
+    font-family: 'Fira Mono', 'Consolas', 'monospace';
+    font-size: 15px;
+    opacity: 0.92;
+    letter-spacing: 0.5px;
+    text-align: center;
+    flex: 1;
+}
+.kali-terminal-close {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #3daee9;
+    border: 1.5px solid #1b6ca8;
+    box-shadow: 0 0 4px #3daee9aa;
+    cursor: pointer;
+}
+.kali-terminal-content {
+    background: none;
+    padding: 2.5em 2.5em 2em 2.5em;
+    font-family: 'Fira Mono', 'Consolas', 'monospace';
+    color: #b8c7ce;
+    font-size: 18px;
+    height: calc(100vh - 36px);
+    box-sizing: border-box;
+}
+.kali-prompt { color: #6ec1e4; }
+.kali-root { color: #ff5555; font-weight: bold; }
+.kali-at { color: #b8c7ce; }
+.kali-host { color: #3daee9; }
+.kali-path { color: #b8c7ce; }
+.kali-hash { color: #ff5555; font-weight: bold; }
+.kali-cursor {
+    display: inline-block;
+    width: 16px;
+    height: 22px;
+    background: #fff;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s steps(1) infinite;
+}
+@media (max-width: 900px) {
+    .kali-terminal-frame { max-width: 99vw; }
+    .kali-terminal-content { padding: 1em 0.5em; font-size: 15px; }
+}
+.kali-blog-title { color: #3daee9; text-decoration: none; font-weight: bold; }
+.kali-blog-desc { color: #7a8fa6; font-size: 15px; margin-left: 2em; }
+.post-page .kali-terminal-frame {
+    background: rgba(10, 22, 34, 0.92) !important;
+}
+body, * {
+    cursor: url('images/my-cursor.cur'), auto !important;
+}
+h1 {
+    color: #3daee9;
+    text-align: center;
+    margin-top: 40px;
+}
+#pdf-list {
+    max-width: 600px;
+    margin: 40px auto;
+    background: rgba(10,22,34,0.92);
+    border-radius: 10px;
+    padding: 32px;
+    box-shadow: 0 8px 32px 0 #000a;
+}
+.pdf-entry {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #233;
+}
+.pdf-entry:last-child {
+    border-bottom: none;
+}
+a {
+    color: #3daee9;
+    text-decoration: none;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline;
+} 

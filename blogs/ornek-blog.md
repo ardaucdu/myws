@@ -8,13 +8,13 @@ CSTI’da ise template işleme işlemi, kullanıcının tarayıcısı üzerinde 
 
 ## Örnek: Jinja2 Güvenli Kod
 
-![[Pasted image 20260516035644.png]]
+![SSTI2](images/20260516035644.png)
 `render()` fonksiyonuna gönderilen template `"Hello {{name}}"` statik bir değerdir, input “Arda” sadece “name” adlı değişkenin değeri olarak atanıyor. Bunlar bu kodun Template Injection konusunda güvenli olmasının ana sebepleridir.  
 Çıktı: **Hello Arda  
 **Burada `{{7*7}}` ifadesi çalışmayacaktır.
 
 ## Zafiyetli Kod Örneği
-![[Pasted image 20260516035728.png]]
+![SSTI2](images/20260516035728.png)
 Bu koddaki tehlikeli kısım, `render()`’ın alacağı template sadece `{{7*7}}` değil `"Hello {{7*7}}"` şeklinde olduğunda, çıktı olarak **Hello 49** döndürmesidir. İşte bu durum SSTI açığına neden olur.
 
 ## SSTI Saldırı Metodolojisi
@@ -34,7 +34,7 @@ Sonrasında ya hata bekleriz ya da belirli bir kısmına bir belirteç koyabilir
 
 Böylece çıktıda hangi özel karakterlerin işlendiğini görürüz ve hangi template engine kullanıldığını anlamaya çalışırız.
 
-![[Pasted image 20260516035743.png]]
+![SSTI3](images/20260516035743.png)
 
 > örnek olarak verdiğimiz input ve çıktı karşılaştırıldığında **<%** özel karakterlerinin eksik olduğunu görüyoruz.
 
@@ -46,7 +46,7 @@ Bu davranışı internette araştırdığımızda (book.hacktricks.wiki’de ön
 > <%= system(‘cat /etc/passwd’) %>**
 
 
-![[Pasted image 20260516035755.png]]
+![SSTI4](images/20260516035755.png)
 
 Bu sistemde başarılı oluyoruz.
 
@@ -63,13 +63,13 @@ Sistemde Template Injection olduğunu anladıktan sonra:
 > <%=“arda”.class%>
 
 yazıp çıktısını görürüz.Bize bulunduğumuz sınıfı söyler. Aynı zamanda Ruby’de her sınıf başka bir sınıftan türetildiğini bildiğimizden zincirin ilk aşamasıdır. Bundan sonra bir üst sınıfa çıkacağız.
-![[Pasted image 20260516035821.png]]
+![[Pasted image 20260516035821.png]](images/20260516035821.png)
 Diğer aşamada superclass’a çıkacağız
 
 > <%= “arda”.class.superclass %>
 
 yazdığımızda Object çıktısını alıyoruz. Object sınıfı Ruby’deki en temel sınıftır ve içinde bir çok işimize yarayabilecek method vardır.
-![[Pasted image 20260516035832.png]]
+![[Pasted image 20260516035832.png]](images/20260516035832.png)
 Method aşamasında
 
 > <%= Object.methods %>
@@ -91,7 +91,7 @@ Yukarıdan topladığımız bilgilerle:
 
 Bu payload ile`/etc/passwd` dosyası okunabilir.
 
-![[Pasted image 20260516035859.png]]
+![SSTI8](images/20260516035859.png)
 
 Eğer passwd dosyasını direkt
 

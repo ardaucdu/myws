@@ -76,7 +76,7 @@ Method aşamasında
 
 inputunu methodları görmek için kullanırız. Burada uzunca bir method çıktısı alıyoruz.
 
-![SSTI](images/20260516035845.png/)
+![SSTI](images/20260516035845.png)
 
 Özellikle yukarıda altını çizdiğim aşağıdaki methodlar RCE yapmak için güçlü methodlardır.
 

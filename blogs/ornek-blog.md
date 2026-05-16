@@ -63,20 +63,20 @@ Sistemde Template Injection olduğunu anladıktan sonra:
 > <%=“arda”.class%>
 
 yazıp çıktısını görürüz.Bize bulunduğumuz sınıfı söyler. Aynı zamanda Ruby’de her sınıf başka bir sınıftan türetildiğini bildiğimizden zincirin ilk aşamasıdır. Bundan sonra bir üst sınıfa çıkacağız.
-![[Pasted image 20260516035821.png]](images/20260516035821.png)
+![SSTI](images/20260516035821.png)
 Diğer aşamada superclass’a çıkacağız
 
 > <%= “arda”.class.superclass %>
 
 yazdığımızda Object çıktısını alıyoruz. Object sınıfı Ruby’deki en temel sınıftır ve içinde bir çok işimize yarayabilecek method vardır.
-![[Pasted image 20260516035832.png]](images/20260516035832.png)
+![SSSTI](images/20260516035832.png)
 Method aşamasında
 
 > <%= Object.methods %>
 
 inputunu methodları görmek için kullanırız. Burada uzunca bir method çıktısı alıyoruz.
 
-![[Pasted image 20260516035845.png]]
+![SSTI](images20260516035845.png/)
 
 Özellikle yukarıda altını çizdiğim aşağıdaki methodlar RCE yapmak için güçlü methodlardır.
 

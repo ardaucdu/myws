@@ -923,3 +923,18 @@ html, body {
         padding: 10px 15px;
     }
 }
+
+@keyframes terminal-boot {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kali-terminal-frame {
+    animation: terminal-boot 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}

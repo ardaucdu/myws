@@ -12,6 +12,23 @@
     </head>
 <body>
     <div id="dark-overlay"></div>
+
+    <div id="main-content">
+        <div class="kali-terminal-frame shrink" id="draggable-terminal">
+            <div class="kali-terminal-topbar" id="terminal-topbar" >
+                <span class="kali-terminal-title" >root@ardaucdu: ~</span>
+                <span class="kali-terminal-close"></span>
+            </div>
+            <div class="kali-terminal-content" id="terminal-content" >
+
+                <div class="kali-prompt">
+                    <span class="kali-root">root</span><span class="kali-at">@</span><span class="kali-host">ardaucdu</span><span class="kali-path">:~#</span> ls -la /blogs
+                </div>
+                <pre class="kali-blog-desc" id="blog-list-container" >Yükleniyor... (Bloglar aranıyor)</pre>
+                <div class="kali-prompt">
+                    <span class="kali-root">root</span><span class="kali-at">@</span><span class="kali-host">ardaucdu</span><span class="kali-path">:~#</span> <span id="arda-komut"></span><span class="kali-cursor"></span>
+                </div>
+            </div>
         </div>
     </div>
     <div id="blog-modal" class="hidden">

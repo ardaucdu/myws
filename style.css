@@ -887,8 +887,18 @@ html, body {
 /* Mobile Responsive Overrides */
 @media (max-width: 900px) {
     body {
-        background-size: contain !important;
-        background-position: center 30% !important;
+        background: #070c12 !important; /* Remove the desktop wallpaper */
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: url('images/logoll.png') no-repeat center center;
+        background-size: 50vw;
+        opacity: 0.15;
+        filter: grayscale(100%);
+        pointer-events: none;
+        z-index: 0;
     }
     .kali-terminal-frame.shrink {
         width: 96vw;

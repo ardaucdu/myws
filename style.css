@@ -886,6 +886,10 @@ html, body {
 
 /* Mobile Responsive Overrides */
 @media (max-width: 900px) {
+    body {
+        background-size: contain !important;
+        background-position: center 30% !important;
+    }
     .kali-terminal-frame.shrink {
         width: 96vw;
         max-width: 96vw;

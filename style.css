@@ -887,18 +887,28 @@ html, body {
 /* Mobile Responsive Overrides */
 @media (max-width: 900px) {
     .kali-terminal-frame.shrink {
-        width: 96vw;
-        max-width: 96vw;
-        margin: 20px auto 40px auto;
-        min-height: 400px;
+        position: absolute;
+        top: 15px;
+        bottom: 15px;
+        left: 3vw;
+        right: 3vw;
+        width: auto;
+        height: auto;
+        max-width: none;
+        max-height: none;
+        margin: 0;
         border-radius: 6px;
+        display: flex;
+        flex-direction: column;
     }
     .kali-terminal-content {
         padding: 1em 1em;
         font-size: 14.5px;
         font-weight: 500;
         -webkit-font-smoothing: antialiased;
-        height: calc(100vh - 80px);
+        height: auto;
+        flex: 1 1 auto;
+        overflow-y: auto;
     }
     .markdown-body {
         font-size: 14.5px;

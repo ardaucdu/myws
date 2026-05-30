@@ -126,7 +126,14 @@ body::after {
     .kali-terminal-content { padding: 1em 0.5em; font-size: 15px; }
 }
 .kali-blog-title { color: #3daee9; text-decoration: none; font-weight: bold; }
-.kali-blog-desc { color: #7a8fa6; font-size: 15px; margin-left: 2em; }
+.kali-blog-desc { 
+    color: #7a8fa6; 
+    font-size: 15px; 
+    margin-left: 2em; 
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+    overflow-x: hidden;
+}
 body, * {
     cursor: url('images/my-cursor.cur'), auto !important;
 }
@@ -255,7 +262,14 @@ html, body {
             51%, 100% { opacity: 0; }
         }
         .kali-blog-title { color: #3daee9; text-decoration: none; font-weight: bold; }
-        .kali-blog-desc { color: #7a8fa6; font-size: 15px; margin-left: 2em; }
+        .kali-blog-desc { 
+            color: #7a8fa6; 
+            font-size: 15px; 
+            margin-left: 2em; 
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+            overflow-x: hidden;
+        }
         .markdown-body {
             font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
             color: #e0e0e0;
